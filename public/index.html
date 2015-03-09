@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Shortly</title>
+    <title>Github Saga</title>
 
     <link rel="stylesheet" type="text/css" href="./style.css">
 
@@ -15,24 +15,24 @@
 
   <body>
     <h1>Github Saga</h1>
-    <form>
-        <input class='text' type='text' name='githubhandle'>
+    <form id='findUser'>
+        <input class='text' type='text' id='githubhandle'>
         <input type='submit' value='Find'>
     </form>
-    <img class='spinner' src='./spiffygif_46x46.gif'>
+    <!-- <img class='spinner' src='./spiffygif_46x46.gif'> -->
     <div class='message'></div>
   </body>
 </html>
 
 <script>
-  $(function(){
-    new Shortly();
-  });
+  // $(function(){
+  //   new Shortly();
+  // });
 
-  window.Templates = {};
-  $('[type="text/x-handlebars-template"]').each(function(index, div){
-    Templates[div.id] = Handlebars.compile(div.innerHTML);
-  });
+  // window.Templates = {};
+  // $('[type="text/x-handlebars-template"]').each(function(index, div){
+  //   Templates[div.id] = Handlebars.compile(div.innerHTML);
+  // });
 </script>
 
 <script src='./client/app.js'></script>
