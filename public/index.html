@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Shortly</title>
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/underscore.js"></script>
+    <script src="./lib/backbone.js"></script>
+    <script src="./lib/handlebars.js"></script>
+
+  </head>
+
+  <body>
+    <h1>Github Saga</h1>
+    <form>
+        <input class='text' type='text' name='githubhandle'>
+        <input type='submit' value='Find'>
+    </form>
+    <img class='spinner' src='./spiffygif_46x46.gif'>
+    <div class='message'></div>
+  </body>
+</html>
+
+<script>
+  $(function(){
+    new Shortly();
+  });
+
+  window.Templates = {};
+  $('[type="text/x-handlebars-template"]').each(function(index, div){
+    Templates[div.id] = Handlebars.compile(div.innerHTML);
+  });
+</script>
+
+<script src='./client/app.js'></script>
+<script src='./client/user.js'></script>
+<script src='./client/users.js'></script>
+<script src='./client/userView.js'></script>
+<script src='./client/usersView.js'></script>
