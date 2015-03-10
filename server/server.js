@@ -15,30 +15,32 @@ var fs = require("fs");
 
 initialize();
 var storage = [];
+var existUser = [];
 
-var readLog = function() {
-  fs.readFile(__dirname + '/msglog.json', 'utf8', function (err, data) {
+var readLog = function(filepath, entry) {
+  fs.readFile(__dirname + filepath, 'utf8', function (err, data) {
     if (err) throw err;
     console.log('read file');
-    storage = JSON.parse(data);
+    entry = JSON.parse(data);
   });
 };
 
-var writeLog = function() {
-    fs.writeFile(__dirname + '/msglog.json', JSON.stringify(storage), function (err, data) {
+var writeLog = function(filepath, entry) {
+    fs.writeFile(__dirname + filepath, JSON.stringify(entry), function (err, data) {
     if (err) throw err;
     console.log('wrote file');
   });
 };
 
-readLog();
+readLog('/msglog2.json', storage);
+readLog('/msglog3.json', existUser);
 
 var headers = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
   "access-control-allow-headers": "content-type, accept",
   "access-control-max-age": 10, // Seconds.
-  'Content-Type': "text/html"
+  'Content-Type': "application/json"
 };
 
 var app = express();
@@ -55,8 +57,8 @@ app.use(express.static(__dirname + '/../public'));
 
 // var user = github.getUser();
 var checkExist = function(username) {
-  var storageString = storage.toString();
-  if (storageString.indexOf(username) >=0){
+  var allusers = existUser.toString();
+  if (allusers.indexOf(username) >=0){
     console.log('true')
     return true;
   } 
@@ -72,13 +74,15 @@ var handleGet = function(request, response){
   if (checkExist(username)){
 
   } else {
-    var checkUserList = [];
+    var checkUserList = {};
     //Put username into final user checks list
-    checkUserList.push(username);
+    checkUserList['useraccount'] = username;
     console.log(username);
     //Get target user's followers
     var url= "https://github.com/" + username;
     console.log("make request to : ", url);
+    existUser.push(username);
+    writeLog('/msglog3.json', existUser);
 
     //Read user's contribution data
     jsdom.env(
@@ -94,14 +98,16 @@ var handleGet = function(request, response){
         var savedImg = img.substring(0, img.indexOf('&s=460')+3) + "100";
         var fullname = window.$(".vcard-fullname").text();
 
-        checkUserList.push(fullname);
-        checkUserList.push(savedImg);
-        checkUserList.push(lastYearContri);
-        checkUserList.push(longestStreak);
-        checkUserList.push(currentStreak);
+        checkUserList['username'] = fullname;
+        checkUserList['imageUrl'] = savedImg;
+        checkUserList['lastContri'] = lastYearContri;
+        checkUserList['longestContri'] = longestStreak;
+        checkUserList['currentContri'] = currentStreak;
         storage.push(checkUserList);
-        console.log(storage);
-        writeLog();
+
+        // console.log(storage);
+        writeLog('/msglog2.json', storage);
+        response.send(storage);
       }
     );
 
@@ -113,10 +119,10 @@ var handleGet = function(request, response){
 
     // response.end(JSON.stringify(storage));
   }
-  console.log(storage);
+  console.log("2nd storage", storage);
   
   // response.writeHead(200, headers);
-  response.send(storage);
+  
   
 };
 
