@@ -25,12 +25,14 @@
     "forever": "^0.10.11",
     "github": "^0.2.3",
     "github-api": "^0.10.3",
+    "jsdom": "^3.1.2",
     "knex": "~0.5.7",
     "nodemon": "^1.2.1",
     "passport": "^0.2.1",
     "passport-github": "^0.1.5",
     "request": "^2.34.0",
     "serve-static": "^1.6.4",
-    "sqlite3": "~3.0.5"
+    "sqlite3": "~3.0.5",
+    "underscore": "^1.6.0"
   }
 }
