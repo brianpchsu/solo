@@ -40,9 +40,18 @@ var handleGet = function(request, response){
   //Get target user's followers
   // helper.downloadUrls(["http://www.brianpchsu.com/"]);
 
-  var contri = getContrib("https://github.com/brianpchsu", function(data){
-    console.log(data);
-  });
+  jsdom.env(
+    "https://github.com/toddskinner",
+    ["http://code.jquery.com/jquery.js"],
+    function (errors, window) {
+      if(errors) console.log(errors);
+      console.log(window.$(".contrib-number").text());
+    }
+  );
+
+  // var contri = getContrib("https://github.com/brianpchsu", function(data){
+  //   console.log(data);
+  // });
   // request(url + username).pipe(fs.createWriteStream(helper.paths.archivedSites + "/" + url));
   //Put follower's info into user chck list
   //Iterate through each user and save it in a table
