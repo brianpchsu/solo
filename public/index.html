@@ -3,21 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <title>Github Saga</title>
-
-    <link rel="stylesheet" type="text/css" href="./style.css">
-
+<!--     <link rel="stylesheet" type="text/css" href="./style.css"> -->
     <script src="./lib/jquery.js"></script>
     <script src="./lib/underscore.js"></script>
     <script src="./lib/backbone.js"></script>
     <script src="./lib/handlebars.js"></script>
-
+    <script src='./client/app.js'></script>
   </head>
 
   <body>
     <h1>Github Saga</h1>
     <form id='findUser'>
         <input class='text' type='text' id='githubhandle'>
-        <input type='submit' value='Find'>
+        <input type='submit' value='Find' id="submit">
     </form>
     <!-- <img class='spinner' src='./spiffygif_46x46.gif'> -->
     <div class='message'></div>
@@ -25,18 +23,16 @@
 </html>
 
 <script>
-  // $(function(){
-  //   new Shortly();
-  // });
+  $(function(){
+    app.init();
+  });
 
   // window.Templates = {};
   // $('[type="text/x-handlebars-template"]').each(function(index, div){
   //   Templates[div.id] = Handlebars.compile(div.innerHTML);
   // });
 </script>
-
-<!-- <script src='./client/app.js'></script>
-<script src='./client/user.js'></script>
+<!-- <script src='./client/user.js'></script>
 <script src='./client/users.js'></script>
 <script src='./client/userView.js'></script>
 <script src='./client/usersView.js'></script> -->
