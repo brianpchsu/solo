@@ -72,7 +72,7 @@ var handleGet = function(request, response){
 
   //Check if user already in the system
   if (checkExist(username)){
-
+    response.send(storage);
   } else {
     var checkUserList = {};
     //Put username into final user checks list
